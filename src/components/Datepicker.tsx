@@ -1,6 +1,7 @@
 import { CalendarIcon } from '@heroicons/react/outline'
 import { Popover, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import DatepickerPanel from './DatepickerPanel'
 
 interface Props {}
 
@@ -27,8 +28,8 @@ const Datepicker = (props: Props) => {
         leaveFrom="opacity-100 translate-y-0"
         leaveTo="opacity-0 translate-y-1"
       >
-        <Popover.Panel className="absolute z-10 mt-3 transform -translate-x-1/2 w-72 h-72 left-1/2">
-          <div className="w-full h-full overflow-hidden bg-white rounded-lg shadow-lg"></div>
+        <Popover.Panel className="absolute z-10 mt-2 transform -translate-x-1/2 w-72 h-72 left-1/2">
+          <DatepickerPanel />
         </Popover.Panel>
       </Transition>
     </Popover>
