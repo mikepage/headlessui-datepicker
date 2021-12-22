@@ -21,7 +21,7 @@ const Datepicker = (props: Props) => {
           leaveFrom="opacity-100 translate-y-0"
           leaveTo="opacity-0 translate-y-1"
         >
-          <Popover.Panel className="absolute z-10 mt-2 transform -translate-x-1/2 w-72 h-72 left-1/2">
+          <Popover.Panel className="absolute z-10 mt-2 transform -translate-x-1/2 w-72 h-76 left-1/2">
             <DatepickerPanel />
           </Popover.Panel>
         </Transition>

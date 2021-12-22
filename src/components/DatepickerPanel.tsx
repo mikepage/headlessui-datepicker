@@ -19,7 +19,7 @@ interface Props {}
 
 const DatepickerPanel = (props: Props) => {
   const { cursorDate, locale, selectedDate } = useDatepickerContext()
-  const { setSelectedDate } = useDatepickerDispatchContext()
+  const { selectDate } = useDatepickerDispatchContext()
 
   const localeDayValues = getLocaleDayValues(locale)
   const monthDates = eachDayOfInterval({
@@ -57,7 +57,7 @@ const DatepickerPanel = (props: Props) => {
         ))}
       </div>
 
-      <div className="grid grid-cols-7 mb-3 -mx-1 gap-y-2">
+      <div className="grid grid-cols-7 -mx-1 gap-y-2">
         {monthDatesBlank.map((_, index) => (
           <div key={index} className="px-1"></div>
         ))}
@@ -68,7 +68,7 @@ const DatepickerPanel = (props: Props) => {
           return (
             <div key={index} className="px-1">
               <div
-                onClick={() => setSelectedDate(date)}
+                onClick={() => selectDate(date)}
                 className={classNames(
                   'text-sm leading-loose text-center  transition duration-100 ease-in-out rounded-full cursor-pointer',
                   {

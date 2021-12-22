@@ -1,8 +1,9 @@
-import { startOfMonth } from 'date-fns'
+import { add, startOfMonth, sub } from 'date-fns'
 import {
   createContext,
   Dispatch,
   SetStateAction,
+  useCallback,
   useContext,
   useState
 } from 'react'
@@ -14,9 +15,10 @@ interface DatepickerContextProps {
 }
 
 interface DatepickerDispatchContextProps {
-  setCursorDate: Dispatch<SetStateAction<Date>>
   setLocale: Dispatch<SetStateAction<string>>
-  setSelectedDate: Dispatch<SetStateAction<Date>>
+  selectDate: Dispatch<SetStateAction<Date>>
+  gotoNextMonth: () => void
+  gotoPreviousMonth: () => void
 }
 
 interface DatepickerContextProviderProps {
@@ -35,10 +37,22 @@ const DatepickerContextProvider = ({
   const [locale, setLocale] = useState<string>('nl')
   const [selectedDate, setSelectedDate] = useState(null)
 
+  const gotoNextMonth = useCallback(() => {
+    setCursorDate(add(cursorDate, { months: 1 }))
+  }, [cursorDate])
+
+  const gotoPreviousMonth = useCallback(() => {
+    setCursorDate(sub(cursorDate, { months: 1 }))
+  }, [cursorDate])
+
+  const selectDate = useCallback((date: Date) => {
+    setSelectedDate(date)
+  }, [])
+
   return (
     <DatepickerContext.Provider value={{ cursorDate, locale, selectedDate }}>
       <DatepickerDispatchContext.Provider
-        value={{ setCursorDate, setLocale, setSelectedDate }}
+        value={{ setLocale, gotoNextMonth, gotoPreviousMonth, selectDate }}
       >
         {children}
       </DatepickerDispatchContext.Provider>

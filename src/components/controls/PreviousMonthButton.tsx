@@ -1,10 +1,14 @@
 import { ChevronLeftIcon } from '@heroicons/react/outline'
+import { useDatepickerDispatchContext } from '../DatepickerContextProvider'
 
 interface Props {}
 
 const PreviousMonthButton = (props: Props) => {
+  const { gotoPreviousMonth } = useDatepickerDispatchContext()
+
   return (
     <button
+      onClick={() => gotoPreviousMonth()}
       type="button"
       className="inline-flex p-1 transition duration-100 ease-in-out rounded-full cursor-pointer hover:bg-gray-200"
     >
