@@ -1,5 +1,8 @@
+import { eachDayOfInterval, format, lastDayOfMonth } from 'date-fns'
 import {
+  diffStartOfWeek,
   formatDate,
+  FORMAT_DAY_OF_MONTH,
   FORMAT_MONTH,
   FORMAT_YEAR,
   getLocaleDayValues
@@ -14,6 +17,13 @@ const DatepickerPanel = (props: Props) => {
   const { cursorDate, locale } = useDatepickerContext()
 
   const localeDayValues = getLocaleDayValues(locale)
+  const monthDates = eachDayOfInterval({
+    start: cursorDate,
+    end: lastDayOfMonth(cursorDate)
+  })
+  const monthDatesBlank = Array.from({
+    length: diffStartOfWeek(cursorDate, locale)
+  })
 
   return (
     <div className="w-full h-full p-4 overflow-hidden bg-white rounded-lg shadow-lg">
@@ -31,13 +41,27 @@ const DatepickerPanel = (props: Props) => {
           <NextMonthButton />
         </div>
       </div>
+
       <div className="grid grid-cols-7 mb-3 -mx-1">
         {localeDayValues.map((dayOfWeek: string, index) => (
-          <div
-            key={index}
-            className="px-1 text-xs font-medium text-center text-gray-800"
-          >
-            {dayOfWeek}
+          <div key={index} className="px-1">
+            <div className="text-xs font-medium text-center text-gray-800">
+              {dayOfWeek}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-7 mb-3 -mx-1 gap-y-2">
+        {monthDatesBlank.map((_, index) => (
+          <div key={index} className="px-1"></div>
+        ))}
+
+        {monthDates.map((date: Date, index) => (
+          <div key={index} className="px-1">
+            <div className="text-sm leading-loose text-center text-gray-600 transition duration-100 ease-in-out rounded-full cursor-pointer hover:bg-blue-200">
+              {format(date, FORMAT_DAY_OF_MONTH)}
+            </div>
           </div>
         ))}
       </div>

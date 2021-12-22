@@ -1,4 +1,10 @@
-import { format, isDate, isValid } from 'date-fns'
+import {
+  differenceInCalendarDays,
+  format,
+  isDate,
+  isValid,
+  startOfWeek
+} from 'date-fns'
 import { enUS, nl } from 'date-fns/locale'
 
 export const FORMAT_LOCALE_DATE = 'PP'
@@ -22,6 +28,13 @@ export const getLocaleDayValues = (locale: string) => {
       width: 'short'
     })
   )
+}
+
+export const diffStartOfWeek = (date: Date, locale: string) => {
+  const localeConfig = getLocaleConfig(locale)
+  const weekStartsOn = localeConfig.options?.weekStartsOn ?? 0
+
+  return differenceInCalendarDays(date, startOfWeek(date, { weekStartsOn }))
 }
 
 export const formatDate = (date: Date, dateFormat: string, locale: string) => {
