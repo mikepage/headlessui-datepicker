@@ -1,4 +1,5 @@
-import { eachDayOfInterval, format, lastDayOfMonth } from 'date-fns'
+import classNames from 'classnames'
+import { eachDayOfInterval, format, isEqual, lastDayOfMonth } from 'date-fns'
 import {
   diffStartOfWeek,
   formatDate,
@@ -17,7 +18,7 @@ import {
 interface Props {}
 
 const DatepickerPanel = (props: Props) => {
-  const { cursorDate, locale } = useDatepickerContext()
+  const { cursorDate, locale, selectedDate } = useDatepickerContext()
   const { setSelectedDate } = useDatepickerDispatchContext()
 
   const localeDayValues = getLocaleDayValues(locale)
@@ -61,16 +62,26 @@ const DatepickerPanel = (props: Props) => {
           <div key={index} className="px-1"></div>
         ))}
 
-        {monthDates.map((date: Date, index) => (
-          <div key={index} className="px-1">
-            <div
-              onClick={() => setSelectedDate(date)}
-              className="text-sm leading-loose text-center text-gray-600 transition duration-100 ease-in-out rounded-full cursor-pointer hover:bg-blue-200"
-            >
-              {format(date, FORMAT_DAY_OF_MONTH)}
+        {monthDates.map((date: Date, index) => {
+          const isDateSelected = isEqual(date, selectedDate)
+
+          return (
+            <div key={index} className="px-1">
+              <div
+                onClick={() => setSelectedDate(date)}
+                className={classNames(
+                  'text-sm leading-loose text-center  transition duration-100 ease-in-out rounded-full cursor-pointer',
+                  {
+                    'bg-emerald-600 text-white': isDateSelected,
+                    'text-gray-600 hover:bg-emerald-100': !isDateSelected
+                  }
+                )}
+              >
+                {format(date, FORMAT_DAY_OF_MONTH)}
+              </div>
             </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
     </div>
   )

@@ -32,7 +32,7 @@ const DatepickerContextProvider = ({
   children
 }: DatepickerContextProviderProps) => {
   const [cursorDate, setCursorDate] = useState<Date>(startOfMonth(new Date()))
-  const [locale, setLocale] = useState<string>('en')
+  const [locale, setLocale] = useState<string>('nl')
   const [selectedDate, setSelectedDate] = useState(null)
 
   return (
