@@ -4,11 +4,13 @@ import DatepickerPanel from './DatepickerPanel'
 import DatepickerContextProvider from './DatepickerContextProvider'
 import DatepickerInput from './DatepickerInput'
 
-interface Props {}
+interface Props {
+  locale: string
+}
 
-const Datepicker = (props: Props) => {
+const Datepicker = ({ locale }: Props) => {
   return (
-    <DatepickerContextProvider>
+    <DatepickerContextProvider locale={locale}>
       <Popover className="relative">
         <DatepickerInput />
 
