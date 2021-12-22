@@ -1,11 +1,8 @@
-import { Locale } from 'date-fns'
 import { createContext, useContext } from 'react'
 
 interface DatepickerContextProps {
   cursorDate: Date
   locale: string
-  localeConfig?: Locale
-  localeValues?: any
 }
 
 const DatepickerContext = createContext<DatepickerContextProps>({
@@ -13,6 +10,7 @@ const DatepickerContext = createContext<DatepickerContextProps>({
   locale: 'en'
 })
 
-export const useDatepickerContext = () => useContext<DatepickerContextProps>(DatepickerContext)
+export const useDatepickerContext = () =>
+  useContext<DatepickerContextProps>(DatepickerContext)
 
 export default DatepickerContext

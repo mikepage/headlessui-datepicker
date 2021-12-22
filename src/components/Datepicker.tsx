@@ -3,25 +3,19 @@ import { Popover, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import DatepickerPanel from './DatepickerPanel'
 import DatepickerContext from './DatepickerContext'
-import { getLocaleConfig } from '../utils/LocaleConfig'
-import { getLocaleValues } from '../utils/LocaleValues'
 import { startOfMonth } from 'date-fns'
 
 interface Props {}
 
 const Datepicker = (props: Props) => {
   const cursorDate = startOfMonth(new Date())
-  const locale = 'en'
-  const localeConfig = getLocaleConfig(locale)
-  const localeValues = getLocaleValues(locale)
+  const locale = 'nl'
 
   return (
     <DatepickerContext.Provider
       value={{
         cursorDate,
-        locale,
-        localeConfig,
-        localeValues
+        locale
       }}
     >
       <Popover className="relative">
