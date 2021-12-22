@@ -2,22 +2,13 @@ import { CalendarIcon } from '@heroicons/react/outline'
 import { Popover, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import DatepickerPanel from './DatepickerPanel'
-import DatepickerContext from './DatepickerContext'
-import { startOfMonth } from 'date-fns'
+import DatepickerContextProvider from './DatepickerContextProvider'
 
 interface Props {}
 
 const Datepicker = (props: Props) => {
-  const cursorDate = startOfMonth(new Date())
-  const locale = 'nl'
-
   return (
-    <DatepickerContext.Provider
-      value={{
-        cursorDate,
-        locale
-      }}
-    >
+    <DatepickerContextProvider>
       <Popover className="relative">
         <input
           type="text"
@@ -44,7 +35,7 @@ const Datepicker = (props: Props) => {
           </Popover.Panel>
         </Transition>
       </Popover>
-    </DatepickerContext.Provider>
+    </DatepickerContextProvider>
   )
 }
 

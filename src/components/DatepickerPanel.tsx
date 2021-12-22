@@ -9,7 +9,7 @@ import {
 } from '../utils/DateFormatter'
 import NextMonthButton from './controls/NextMonthButton'
 import PreviousMonthButton from './controls/PreviousMonthButton'
-import { useDatepickerContext } from './DatepickerContext'
+import { useDatepickerContext } from './DatepickerContextProvider'
 
 interface Props {}
 
