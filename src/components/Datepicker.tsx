@@ -1,8 +1,8 @@
-import { CalendarIcon } from '@heroicons/react/outline'
 import { Popover, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import DatepickerPanel from './DatepickerPanel'
 import DatepickerContextProvider from './DatepickerContextProvider'
+import DatepickerInput from './DatepickerInput'
 
 interface Props {}
 
@@ -10,17 +10,8 @@ const Datepicker = (props: Props) => {
   return (
     <DatepickerContextProvider>
       <Popover className="relative">
-        <input
-          type="text"
-          className="w-full py-3 pl-4 pr-10 font-medium leading-none text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline"
-          placeholder="Select date"
-        />
+        <DatepickerInput />
 
-        <div className="absolute top-0 right-0 px-3 py-2">
-          <Popover.Button>
-            <CalendarIcon className="w-6 h-6 text-gray-400" />
-          </Popover.Button>
-        </div>
         <Transition
           as={Fragment}
           enter="transition ease-out duration-200"

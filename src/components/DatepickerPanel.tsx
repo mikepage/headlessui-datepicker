@@ -9,12 +9,16 @@ import {
 } from '../utils/DateFormatter'
 import NextMonthButton from './controls/NextMonthButton'
 import PreviousMonthButton from './controls/PreviousMonthButton'
-import { useDatepickerContext } from './DatepickerContextProvider'
+import {
+  useDatepickerContext,
+  useDatepickerDispatchContext
+} from './DatepickerContextProvider'
 
 interface Props {}
 
 const DatepickerPanel = (props: Props) => {
   const { cursorDate, locale } = useDatepickerContext()
+  const { setSelectedDate } = useDatepickerDispatchContext()
 
   const localeDayValues = getLocaleDayValues(locale)
   const monthDates = eachDayOfInterval({
@@ -59,7 +63,10 @@ const DatepickerPanel = (props: Props) => {
 
         {monthDates.map((date: Date, index) => (
           <div key={index} className="px-1">
-            <div className="text-sm leading-loose text-center text-gray-600 transition duration-100 ease-in-out rounded-full cursor-pointer hover:bg-blue-200">
+            <div
+              onClick={() => setSelectedDate(date)}
+              className="text-sm leading-loose text-center text-gray-600 transition duration-100 ease-in-out rounded-full cursor-pointer hover:bg-blue-200"
+            >
               {format(date, FORMAT_DAY_OF_MONTH)}
             </div>
           </div>

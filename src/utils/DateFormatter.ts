@@ -42,5 +42,5 @@ export const formatDate = (date: Date, dateFormat: string, locale: string) => {
     return format(date, dateFormat, { locale: getLocaleConfig(locale) })
   }
 
-  return date || null
+  return null
 }

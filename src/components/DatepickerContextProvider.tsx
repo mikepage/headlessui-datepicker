@@ -10,11 +10,13 @@ import {
 interface DatepickerContextProps {
   cursorDate: Date
   locale: string
+  selectedDate: Date
 }
 
 interface DatepickerDispatchContextProps {
   setCursorDate: Dispatch<SetStateAction<Date>>
   setLocale: Dispatch<SetStateAction<string>>
+  setSelectedDate: Dispatch<SetStateAction<Date>>
 }
 
 interface DatepickerContextProviderProps {
@@ -31,10 +33,13 @@ const DatepickerContextProvider = ({
 }: DatepickerContextProviderProps) => {
   const [cursorDate, setCursorDate] = useState<Date>(startOfMonth(new Date()))
   const [locale, setLocale] = useState<string>('en')
+  const [selectedDate, setSelectedDate] = useState(null)
 
   return (
-    <DatepickerContext.Provider value={{ cursorDate, locale }}>
-      <DatepickerDispatchContext.Provider value={{ setCursorDate, setLocale }}>
+    <DatepickerContext.Provider value={{ cursorDate, locale, selectedDate }}>
+      <DatepickerDispatchContext.Provider
+        value={{ setCursorDate, setLocale, setSelectedDate }}
+      >
         {children}
       </DatepickerDispatchContext.Provider>
     </DatepickerContext.Provider>
